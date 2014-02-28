@@ -31,7 +31,7 @@ public class KiRouterServletTest {
         };
         HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getMethod()).thenReturn(KiRouterServlet.METHOD_GET);
-        when(request.getContextPath()).thenReturn("/one-name/apo");
+        when(request.getServletPath()).thenReturn("/one-name/apo");
         servlet.service(request,null);
         assertEquals(new HashMap(){{ put("name","apo");}}, ret);
     }

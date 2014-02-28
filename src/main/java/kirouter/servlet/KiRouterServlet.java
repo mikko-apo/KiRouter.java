@@ -14,6 +14,9 @@ public class KiRouterServlet extends HttpServlet {
     public static final String METHOD_GET = "GET";
     public static final String METHOD_POST = "POST";
 
+    public static final String TEXT_HTML = "text/html";
+    public static final int STATUS_OK = 200;
+
     public KiRouterServlet() {
         configure();
     }
@@ -45,7 +48,8 @@ public class KiRouterServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         KiRouter<Route> router = routers.get(req.getMethod());
         if(router != null) {
-            Route matchedRouter = router.exec(req.getContextPath());
+            String path = req.getServletPath();
+            Route matchedRouter = router.exec(path);
             if(matchedRouter != null) {
                 matchedRouter.execute(req, resp);
                 return;
