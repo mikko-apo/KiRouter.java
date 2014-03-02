@@ -37,7 +37,7 @@ class SinatraRouteParser {
             Matcher match = segmentRegex.matcher(segment);
             if (match.matches()) {
                 String firstMatch = match.group(1);
-                if (firstMatch == "*") {
+                if (firstMatch.equals("*")) {
                     keys.add("splat");
                     segment = "(.*)";
                 } else {

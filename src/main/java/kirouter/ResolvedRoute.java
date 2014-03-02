@@ -7,7 +7,7 @@ class ResolvedRoute<V> {
     private final Route<V> route;
     private final SinatraRouteParser parser;
 
-    public ResolvedRoute(Map params, Route route, SinatraRouteParser parser) {
+    public ResolvedRoute(Map params, Route<V> route, SinatraRouteParser parser) {
         this.params = params;
         this.route = route;
         this.parser = parser;

@@ -38,7 +38,7 @@ public class KiRouter<V> {
         Route<V> route;
         SinatraRouteParser parser;
 
-        StoredRoute(Route route, SinatraRouteParser parser) {
+        StoredRoute(Route<V> route, SinatraRouteParser parser) {
             this.route = route;
             this.parser = parser;
         }

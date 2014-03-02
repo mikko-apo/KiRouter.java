@@ -36,7 +36,7 @@ public class KiRouterTest {
             @Override
             public Object process(Map params) {
                 return params.get("name");
-            };
+            }
         });
         assertEquals("apo", router.exec("/one-name/apo"));
         assertEquals("mikko", router.exec("/one-name/mikko"));
@@ -46,7 +46,7 @@ public class KiRouterTest {
     @Test
     public void callbackParameter() {
         KiRouter<SumRoute> router = new KiRouter<SumRoute>();
-        router.add(new SumRoute("/one-name/:name") {
+        router.add(new SumRoute("/sum/:name") {
             @Override
             public String execute(String a, String b) {
                 return params.get("name") + a + b;
