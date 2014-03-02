@@ -1,5 +1,5 @@
 package kirouter;
 
-interface ParamVerifier {
+public interface ParamVerifier {
     public boolean ok(String param);
 }

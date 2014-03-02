@@ -1,5 +1,6 @@
 package kirouter.servlet;
 
+import kirouter.ParamVerifier;
 import kirouter.StrictUrlParameterVerifier;
 import kirouter.KiRouter;
 
@@ -18,12 +19,13 @@ public class KiRouterFilter implements Filter {
     public static final int STATUS_OK = 200;
 
     private Map<String, KiRouter<Route>> routers = new HashMap<String, KiRouter<Route>>();
+    private ParamVerifier paramVerifier = new StrictUrlParameterVerifier();
 
     public void add(String method, Route route) {
         KiRouter<Route> router = routers.get(method);
         if (router == null) {
             router = new KiRouter<Route>();
-            router.setParamVerifier(new StrictUrlParameterVerifier());
+            router.setParamVerifier(paramVerifier);
             routers.put(method, router);
         }
         router.add(route);
@@ -61,5 +63,9 @@ public class KiRouterFilter implements Filter {
     @Override
     public void destroy() {
 
+    }
+
+    public void setParamVerifier(ParamVerifier paramVerifier) {
+        this.paramVerifier = paramVerifier;
     }
 }
