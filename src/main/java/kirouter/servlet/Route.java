@@ -14,6 +14,8 @@ abstract public class Route extends kirouter.Route {
     @Override
     public Object process(Map params) {
         try {
+            // User specified Route has defined execute method that needs params:
+            // * param needs to be set and we need to support parallel operation -> clone
             Route clone = (Route) this.clone();
             clone.params = params;
             return clone;

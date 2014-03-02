@@ -1,9 +1,9 @@
 package kirouter.servlet;
 
+import kirouter.StrictUrlParameterVerifier;
 import kirouter.KiRouter;
 
 import javax.servlet.*;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -21,8 +21,9 @@ public class KiRouterFilter implements Filter {
 
     public void add(String method, Route route) {
         KiRouter<Route> router = routers.get(method);
-        if(router == null) {
+        if (router == null) {
             router = new KiRouter<Route>();
+            router.setParamVerifier(new StrictUrlParameterVerifier());
             routers.put(method, router);
         }
         router.add(route);
@@ -46,10 +47,10 @@ public class KiRouterFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         KiRouter<Route> router = routers.get(req.getMethod());
-        if(router != null) {
+        if (router != null) {
             String path = req.getServletPath();
             Route matchedRouter = router.exec(path);
-            if(matchedRouter != null) {
+            if (matchedRouter != null) {
                 matchedRouter.execute(req, resp);
                 return;
             }
