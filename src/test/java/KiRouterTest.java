@@ -52,8 +52,8 @@ public class KiRouterTest {
                 return params.get("name") + a + b;
             }
         });
-        assertEquals("apoab", router.exec("/one-name/apo").execute("a","b"));
-        assertEquals("mikkoab", router.exec("/one-name/mikko").execute("a","b"));
+        assertEquals("apoab", router.exec("/sum/apo").execute("a","b"));
+        assertEquals("mikkoab", router.exec("/sum/mikko").execute("a","b"));
         assertEquals(null, router.exec("/two-name/apo"));
     }
 }
