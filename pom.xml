@@ -48,14 +48,6 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
-             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <configuration>
-                    <mainClass>JettyEmbedded</mainClass>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 </project>
