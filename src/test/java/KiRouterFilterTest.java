@@ -18,7 +18,7 @@ public class KiRouterFilterTest {
         final List list = new ArrayList();
         Filter filter = new KiRouterFilter() {{
             get(new Route("/one-name/:name") {
-                public void execute(HttpServletRequest request, HttpServletResponse response) {
+                public void run() {
                     list.add(params);
                 }
             });
@@ -27,8 +27,9 @@ public class KiRouterFilterTest {
         HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getMethod()).thenReturn(KiRouterFilter.METHOD_GET);
         when(request.getServletPath()).thenReturn("/one-name/" + stringWithAllStrictCharacters);
+        HttpServletResponse response = mock(HttpServletResponse.class);
         filter.init(null);
-        filter.doFilter(request, null, null);
+        filter.doFilter(request, response, null);
         filter.destroy();
         assertEquals(Arrays.asList(new HashMap() {{
             put("name", stringWithAllStrictCharacters);
@@ -40,7 +41,7 @@ public class KiRouterFilterTest {
         final List list = new ArrayList();
         Filter filter = new KiRouterFilter() {{
             get(new Route("/one-name/:name") {
-                public void execute(HttpServletRequest request, HttpServletResponse response) {
+                public void run() {
                     list.add(params);
                 }
             });
@@ -49,7 +50,8 @@ public class KiRouterFilterTest {
         HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getMethod()).thenReturn(KiRouterFilter.METHOD_GET);
         when(request.getServletPath()).thenReturn("/one-name/apo!!");
-        filter.doFilter(request, null, new FilterChain() {
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        filter.doFilter(request, response, new FilterChain() {
             @Override
             public void doFilter(ServletRequest request, ServletResponse response) throws IOException, ServletException {
 
