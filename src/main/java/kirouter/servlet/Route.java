@@ -38,6 +38,7 @@ abstract public class Route extends kirouter.Route {
 
     public void puts(String s) {
         writer().write(s);
+        writer().write("\n");
     }
 
     public void status(int code) {

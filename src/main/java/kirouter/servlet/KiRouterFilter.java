@@ -53,6 +53,7 @@ public class KiRouterFilter implements Filter {
             String path = req.getServletPath();
             Route matchedRouter = router.exec(path);
             resp.setStatus(STATUS_OK);
+            resp.setContentType(TEXT_HTML);
             if (matchedRouter != null) {
                 matchedRouter.run(req, resp);
                 return;
