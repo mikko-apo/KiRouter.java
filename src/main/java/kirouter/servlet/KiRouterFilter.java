@@ -1,8 +1,8 @@
 package kirouter.servlet;
 
+import kirouter.KiRouter;
 import kirouter.ParamVerifier;
 import kirouter.StrictUrlParameterVerifier;
-import kirouter.KiRouter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -52,9 +52,9 @@ public class KiRouterFilter implements Filter {
         if (router != null) {
             String path = req.getServletPath();
             Route matchedRouter = router.exec(path);
-            resp.setStatus(STATUS_OK);
-            resp.setContentType(TEXT_HTML);
             if (matchedRouter != null) {
+                resp.setStatus(STATUS_OK);
+                resp.setContentType(TEXT_HTML);
                 matchedRouter.run(req, resp);
                 return;
             }
